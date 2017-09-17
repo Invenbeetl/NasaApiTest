@@ -13,10 +13,19 @@ public class NasaRestResponseHelper {
 
     public static final String PHOTOS_NODE = "photos";
 
-    public List<PhotoDTO> handleResponseWithPhotos(String response) {
-        List<PhotoDTO> photosList = new ArrayList<>();
-        JSONArray photosInfoArray = getJsonArray(new JSONObject(response), PHOTOS_NODE);
-        for (int i = 0; i < 10; i++) {
+    public List<PhotoDTO> handleRangeOfPhotosFromResponse(String response, int startRange, int endRange) {
+        List<PhotoDTO> photosInfoList = new ArrayList<>();
+        JSONArray jsonArrayFromResponse = getJsonArray(new JSONObject(response), PHOTOS_NODE);
+        if (startRange < 0 || endRange > jsonArrayFromResponse.length()) {
+            throw new IllegalArgumentException("Given range are out of photos array bounds");
+        }
+        collectInfoFromEachArrayObject(startRange, endRange, photosInfoList, jsonArrayFromResponse);
+        return photosInfoList;
+    }
+
+    private void collectInfoFromEachArrayObject(int startRange, int endRange, List<PhotoDTO> photosList,
+                                                JSONArray photosInfoArray) {
+        for (int i = startRange; i < endRange; i++) {
             PhotoDTO photoDTO = new PhotoDTO();
             JSONObject innerJson = new JSONObject(photosInfoArray.get(i).toString());
             photoDTO.setId(innerJson.get("id").toString());
@@ -24,6 +33,5 @@ public class NasaRestResponseHelper {
             photoDTO.setPhotoUri(innerJson.get("img_src").toString());
             photosList.add(photoDTO);
         }
-        return photosList;
     }
 }

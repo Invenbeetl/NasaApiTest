@@ -10,7 +10,7 @@ public class ReceiveNasaPhotosHelper {
     public static final double SOL_TO_EARTH_DAYS_CONVERSION_INDEX = 1.02749125170;
 
     public String getCuriosityPhotosAtSpecifiedSol(String sol) {
-        return NasaRestUtil.getPhotosFromSpesifiedRoverBySolDate(CURIOSITY_ROVER_NAME, sol);
+        return NasaRestUtil.getPhotosFromSpecifiedRoverBySolDate(CURIOSITY_ROVER_NAME, sol);
     }
 
     public String getCuriosityPhotosAtSpecifiedEarthDateBySol(String sol) {

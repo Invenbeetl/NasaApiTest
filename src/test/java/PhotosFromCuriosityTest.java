@@ -19,10 +19,12 @@ public class PhotosFromCuriosityTest {
     @Test
     public void photosFromTwoApiCallsShouldBeEqual() {
         String photosBySolDateResponse = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedSol("1000");
-        List<PhotoDTO> photosBySolDateInfo = nasaRestResponseHelper.handleResponseWithPhotos(photosBySolDateResponse);
+        List<PhotoDTO> photosBySolDateInfo = nasaRestResponseHelper
+                .handleRangeOfPhotosFromResponse(photosBySolDateResponse, 0, 10);
         imagesHelper.handleImagesFromList(photosBySolDateInfo);
         String photosByEarthDateResponse = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedEarthDateBySol("1000");
-        List<PhotoDTO> photosByEarthDateInfo = nasaRestResponseHelper.handleResponseWithPhotos(photosByEarthDateResponse);
+        List<PhotoDTO> photosByEarthDateInfo = nasaRestResponseHelper
+                .handleRangeOfPhotosFromResponse(photosByEarthDateResponse, 0, 10);
         imagesHelper.handleImagesFromList(photosByEarthDateInfo);
         assertTrue("Photos in the lists are not equal",
                 photosDataComparisionHelper.arePhotosDataFromListsEqual(photosBySolDateInfo, photosByEarthDateInfo));

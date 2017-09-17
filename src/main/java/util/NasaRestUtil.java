@@ -8,7 +8,7 @@ public class NasaRestUtil {
     private static String PHOTOS_BY_EARTH_DATE_ENDPOINT =
             "/mars-photos/api/v1/rovers/%s/photos?earth_date=%s&api_key=DEMO_KEY";
 
-    public static String getPhotosFromSpesifiedRoverBySolDate(String roverName, String date) {
+    public static String getPhotosFromSpecifiedRoverBySolDate(String roverName, String date) {
         String uri = NASA_URI + String.format(PHOTOS_BY_SOL_DATE_ENDPOINT, roverName, date);
         return RestUtil.sendGetRequest(uri);
     }
