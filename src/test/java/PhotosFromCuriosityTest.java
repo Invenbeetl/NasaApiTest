@@ -10,14 +10,14 @@ import java.util.List;
 import static junit.framework.TestCase.assertTrue;
 
 public class PhotosFromCuriosityTest {
-    
+
     ReceiveNasaPhotosHelper receiveNasaPhotosHelper = new ReceiveNasaPhotosHelper();
     NasaRestResponseHelper nasaRestResponseHelper = new NasaRestResponseHelper();
     ImagesHelper imagesHelper = new ImagesHelper();
     PhotosDataComparisionHelper photosDataComparisionHelper = new PhotosDataComparisionHelper();
 
     @Test
-    public void receivePhotosFromCuriosity() {
+    public void photosFromTwoApiCallsShouldBeEqual() {
         String photosBySolDateResponse = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedSol("1000");
         List<PhotoDTO> photosBySolDateInfo = nasaRestResponseHelper.handleResponseWithPhotos(photosBySolDateResponse);
         imagesHelper.handleImagesFromList(photosBySolDateInfo);
