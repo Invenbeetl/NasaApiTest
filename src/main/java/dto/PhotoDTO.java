@@ -9,5 +9,6 @@ public class PhotoDTO {
 
     private String id;
     private String photoUri;
+    private String earthDate;
 
 }

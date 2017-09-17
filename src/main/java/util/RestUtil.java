@@ -1,7 +1,6 @@
 package util;
 
 import static com.jayway.restassured.RestAssured.get;
-import static com.jayway.restassured.RestAssured.given;
 
 public class RestUtil {
 
