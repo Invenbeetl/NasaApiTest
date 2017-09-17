@@ -18,16 +18,26 @@ public class PhotosFromCuriosityTest {
 
     @Test
     public void photosFromTwoApiCallsShouldBeEqual() {
-        String photosBySolDateResponse = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedSol("1000");
-        List<PhotoDTO> photosBySolDateInfo = nasaRestResponseHelper
-                .handleRangeOfPhotosFromResponse(photosBySolDateResponse, 0, 10);
-        imagesHelper.handleImagesFromList(photosBySolDateInfo);
-        String photosByEarthDateResponse = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedEarthDateBySol("1000");
-        List<PhotoDTO> photosByEarthDateInfo = nasaRestResponseHelper
-                .handleRangeOfPhotosFromResponse(photosByEarthDateResponse, 0, 10);
-        imagesHelper.handleImagesFromList(photosByEarthDateInfo);
+        List<PhotoDTO> photosBySolDateInfo = getPhotosWithInfoBySolDate();
+        List<PhotoDTO> photosByEarthDateInfo = getPhotosWithInfoByEarthDate();
         assertTrue("Photos in the lists are not equal",
                 photosDataComparisionHelper.arePhotosDataFromListsEqual(photosBySolDateInfo, photosByEarthDateInfo));
+    }
+
+    private List<PhotoDTO> getPhotosWithInfoByEarthDate() {
+        String responseByEarthDate = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedEarthDateBySol("1000");
+        List<PhotoDTO> photosByEarthDateInfo = nasaRestResponseHelper
+                .handleRangeOfPhotosFromResponse(responseByEarthDate, 0, 10);
+        imagesHelper.handleImagesFromList(photosByEarthDateInfo);
+        return photosByEarthDateInfo;
+    }
+
+    private List<PhotoDTO> getPhotosWithInfoBySolDate() {
+        String responseBySolDate = receiveNasaPhotosHelper.getCuriosityPhotosAtSpecifiedSol("1000");
+        List<PhotoDTO> photosBySolDateInfo = nasaRestResponseHelper
+                .handleRangeOfPhotosFromResponse(responseBySolDate, 0, 10);
+        imagesHelper.handleImagesFromList(photosBySolDateInfo);
+        return photosBySolDateInfo;
     }
 
 }
