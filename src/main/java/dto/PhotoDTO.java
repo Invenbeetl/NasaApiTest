@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PhotoDTO {
+public class PhotoDTO extends BaseDTO{
 
     private String id;
     private String photoUri;
