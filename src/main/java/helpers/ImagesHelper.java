@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ImagesHelper {
 
-    public static final String PATH_TO_DOWNLOADS_DIR = "/src/test/resources/downloads/";
+    public static final String PATH_TO_DOWNLOADS_DIR = "/target/downloads/";
 
     public void handleImagesFromList (List<PhotoDTO> imagesInfoList) {
         for (PhotoDTO photoDTO : imagesInfoList) {
@@ -18,6 +18,9 @@ public class ImagesHelper {
     }
 
     public long getSizeOfDownloadedImage(String stringUrl) {
+        File downloadsFolder = new File(normalizePathToProjectRootDir() + PATH_TO_DOWNLOADS_DIR);
+        if (!downloadsFolder.exists())
+            downloadsFolder.mkdirs();
         final File file = new File(normalizePathToProjectRootDir() + PATH_TO_DOWNLOADS_DIR
                 + generateName());
         try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
